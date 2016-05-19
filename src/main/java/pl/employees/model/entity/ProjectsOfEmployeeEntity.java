@@ -17,7 +17,7 @@ public class ProjectsOfEmployeeEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_projects_of_employees")
 	private int idProjectsOfEmployees;
 	

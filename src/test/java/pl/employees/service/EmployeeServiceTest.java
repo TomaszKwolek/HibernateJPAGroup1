@@ -20,31 +20,60 @@ public class EmployeeServiceTest {
 	@Autowired
 	private EmployeeService employeeService;
 
-	@Test
-	public void testShouldFindAll() {
-		// given
-		 List<EmployeeTo> employees = employeeService.findAllEmployees();
-		 System.out.println(employees.size());
-		// then
-		assertNotNull(employees);
+//	@Test
+//	public void testShouldFindAll() {
+//		// given
+//		 List<EmployeeTo> employees = employeeService.findAllEmployees();
+//		 System.out.println(employees.size());
+//		// then
+//		assertNotNull(employees);
+//
+//	}
+//	
+//	@Test
+//	public void testShouldFindByFirstName() {
+//		// given
+//		 List<EmployeeTo> employees = employeeService.findByFirstName("%a%");
+//		 System.out.println(employees.size());
+//		// then
+//		assertNotNull(employees);
 
-	}
-	
-	@Test
-	public void testShouldFindByFirstName() {
-		// given
-		 List<EmployeeTo> employees = employeeService.findByFirstName("%a%");
-		 System.out.println(employees.size());
-		// then
-		assertNotNull(employees);
-
-	}
+	//}
 	
 	@Test
 	public void testShouldCreateNewEmployee() {
 		// given
-		employeeService.createEmployee(23,new Date(2013-04-12), "aaa", "bbb", "223456546");
+		employeeService.createEmployee();
 		//System.out.println(employees.size());
+		// then
+		//assertNotNull(employees);
+
+	}
+	
+//	@Test
+//	public void testShouldDeleteAll() {
+//		// given
+//		employeeService.deleteAll();
+//		//System.out.println(employees.size());
+//		// then
+//		//assertNotNull(employees);
+//
+//	}
+//	
+//	@Test
+//	public void testShouldDelete() {
+//		// given
+//		//System.out.println(employees.size());
+//		// then
+//		//assertNotNull(employees);
+//
+//	}
+	
+	@Test
+	public void testShouldUpdateEmployee() {
+		// given
+		//System.out.println(employees.size());
+		employeeService.updateEmployee(2, null,"update", "employee", null);
 		// then
 		//assertNotNull(employees);
 

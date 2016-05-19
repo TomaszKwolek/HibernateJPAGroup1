@@ -45,16 +45,37 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	@Transactional(readOnly = false)
-	public void createEmployee(int id, Date dateOfBirth, String firstName, String lastName, String pesel) {
+	public void createEmployee() {
 	//	employeeRepository.save(new EmployeeEntity(id, dateOfBirth, firstName, lastName, pesel, department, poes));
 	//	employeeRepository.save(new EmployeeEntity());
 	//	employeeRepository.insertEmployee(dateOfBirth, firstName, lastName, pesel);
+		EmployeeEntity employeeEntity = new EmployeeEntity();
+		employeeEntity.setIdEmployee(50);
+//		employeeEntity.setDateOfBirth(new Date(2013-04-12));
+		employeeEntity.setFirstName("ccc");
+		employeeEntity.setLastName("ddd");
+		employeeRepository.save(employeeEntity);
+		
 	}
 	
 
 	@Override
+	@Transactional(readOnly = false)
 	public void updateEmployee(int id, Date dateOfBirth, String name, String surname, String pesel) {
+		employeeRepository.updateEmployee(name, surname, id);
+	}
+
+
+	@Override
+	public void deleteEmployee(int id) {
 		// TODO Auto-generated method stub
+		employeeRepository.deleteAll();
+	}
+
+
+	@Override
+	public void deleteAll() {
+		employeeRepository.deleteAll();
 		
 	}
 

@@ -11,7 +11,9 @@ public interface EmployeeService{
 
 	List<EmployeeTo> findAllEmployees();
 	List<EmployeeTo> findByFirstName(String firstName);
-	void createEmployee(int id, Date dateOfBirth, String name, String surname, String pesel);
+	void createEmployee();
+	void deleteAll();
+	void deleteEmployee(int id);
 	void updateEmployee(int id, Date dateOfBirth, String name, String surname, String pesel);
 
 

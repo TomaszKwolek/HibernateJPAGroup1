@@ -23,5 +23,9 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
 //	@Query("update Employee e set e.name = :name, e.surname = :surname, e.pesel = :pesel, e.dateOfBirth = :dateOfBirth where e.id = :id")
 //	void updateEmployeeData(@Param("name") String name, @Param("surname") String surname,
 //			@Param("pesel") String pesel, @Param("dateOfBirth") Date dateOfBirth, @Param("id") int id);
+    
+    @Modifying(clearAutomatically = true)
+    @Query("update EmployeeEntity e set e.firstName = ?1, e.lastName = ?2 where e.idEmployee = ?3")
+    void updateEmployee(String firstName, String lastName, Integer userId);
 	
 }
