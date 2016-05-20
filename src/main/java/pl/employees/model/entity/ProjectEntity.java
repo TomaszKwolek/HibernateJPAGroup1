@@ -23,7 +23,7 @@ public class ProjectEntity implements Serializable {
 	private String projectType;
 
 	//bi-directional many-to-one association to ProjectsOfEmployeeEntity
-	@OneToMany(mappedBy="project")
+	@OneToMany(mappedBy="project", cascade = {CascadeType.ALL})
 	private List<ProjectsOfEmployeeEntity> projectsofemployees;
 
 	public ProjectEntity() {

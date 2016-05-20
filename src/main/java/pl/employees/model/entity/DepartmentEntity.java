@@ -2,6 +2,9 @@ package pl.employees.model.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.annotations.Cascade;
+
 import java.util.List;
 import java.util.Set;
 
@@ -21,7 +24,7 @@ public class DepartmentEntity implements Serializable {
 	private String departmentName;
 
 	//bi-directional many-to-one association to EmployeeEntity
-	@OneToMany(mappedBy="department")
+	@OneToMany(mappedBy="department", cascade = {CascadeType.ALL})
 	private Set<EmployeeEntity> employees;
 
 	public DepartmentEntity() {

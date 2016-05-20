@@ -10,19 +10,19 @@ import pl.employees.model.entity.ProjectEntity;
 public class ProjectsOfEmployeeTo {
 	
 
-	private int idProjectsOfEmployees;
+	private long idProjectsOfEmployees;
 	private BigDecimal dailySalary;
 	private Date dateStart;
 	private Date dateStop;
 	private String role;
-	private EmployeeEntity employee;
-	private ProjectEntity project;
+	private EmployeeTo employee;
+	private ProjectTo project;
 	
 	public ProjectsOfEmployeeTo() {
 	}	
 	
-	public ProjectsOfEmployeeTo(int idProjectsOfEmployees, BigDecimal dailySalary, Date dateStart, Date dateStop,
-			String role, EmployeeEntity employee, ProjectEntity project) {
+	public ProjectsOfEmployeeTo(long idProjectsOfEmployees, BigDecimal dailySalary, Date dateStart, Date dateStop,
+			String role, EmployeeTo employee, ProjectTo project) {
 		super();
 		this.idProjectsOfEmployees = idProjectsOfEmployees;
 		this.dailySalary = dailySalary;
@@ -33,10 +33,10 @@ public class ProjectsOfEmployeeTo {
 		this.project = project;
 	}
 	
-	public int getIdProjectsOfEmployees() {
+	public long getIdProjectsOfEmployees() {
 		return idProjectsOfEmployees;
 	}
-	public void setIdProjectsOfEmployees(int idProjectsOfEmployees) {
+	public void setIdProjectsOfEmployees(long idProjectsOfEmployees) {
 		this.idProjectsOfEmployees = idProjectsOfEmployees;
 	}
 	public BigDecimal getDailySalary() {
@@ -63,16 +63,16 @@ public class ProjectsOfEmployeeTo {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public EmployeeEntity getEmployee() {
+	public EmployeeTo getEmployee() {
 		return employee;
 	}
-	public void setEmployee(EmployeeEntity employee) {
+	public void setEmployee(EmployeeTo employee) {
 		this.employee = employee;
 	}
-	public ProjectEntity getProject() {
+	public ProjectTo getProject() {
 		return project;
 	}
-	public void setProject(ProjectEntity project) {
+	public void setProject(ProjectTo project) {
 		this.project = project;
 	}
 	

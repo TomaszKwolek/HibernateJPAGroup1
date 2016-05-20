@@ -39,49 +39,27 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 
 	@Override
-	public List<EmployeeTo> findByFirstName(String firstName) {
-		return mapper.mapEmployee2Tos(employeeRepository.findByName(firstName));
-	}
-
-	@Override
-	@Transactional(readOnly = false)
-	public void createEmployee() {
-	//	employeeRepository.save(new EmployeeEntity(id, dateOfBirth, firstName, lastName, pesel, department, poes));
-	//	employeeRepository.save(new EmployeeEntity());
-	//	employeeRepository.insertEmployee(dateOfBirth, firstName, lastName, pesel);
-		EmployeeEntity employeeEntity = new EmployeeEntity();
-		employeeEntity.setIdEmployee(50);
-//		employeeEntity.setDateOfBirth(new Date(2013-04-12));
-		employeeEntity.setFirstName("ccc");
-		employeeEntity.setLastName("ddd");
-		employeeRepository.save(employeeEntity);
-		
+	public List<EmployeeTo> findbyName(String name) {
+		return mapper.mapEmployee2Tos(employeeRepository.findByName(name));
 	}
 	
+	@Override
+	@Transactional(readOnly = false)
+	public void createOrUpdateEmployee(EmployeeTo employeeTo) {
+		employeeRepository.save(mapper.map2EmployeeEntity(employeeTo));
+	}
+
+
+	@Override
+	public void deleteEmployee(long id) {
+		employeeRepository.deleteEmployee(id);;
+	}
 
 	@Override
 	@Transactional(readOnly = false)
-	public void updateEmployee(int id, Date dateOfBirth, String name, String surname, String pesel) {
-		employeeRepository.updateEmployee(name, surname, id);
-	}
-
-
-	@Override
-	public void deleteEmployee(int id) {
-		// TODO Auto-generated method stub
-		employeeRepository.deleteAll();
-	}
-
-
-	@Override
 	public void deleteAll() {
-		employeeRepository.deleteAll();
+		employeeRepository.deleteAllEmployees();
 		
 	}
-
-
-
-
-
 
 }

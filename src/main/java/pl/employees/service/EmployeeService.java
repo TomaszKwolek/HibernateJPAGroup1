@@ -10,11 +10,9 @@ import pl.employees.model.to.EmployeeTo;
 public interface EmployeeService{
 
 	List<EmployeeTo> findAllEmployees();
-	List<EmployeeTo> findByFirstName(String firstName);
-	void createEmployee();
+	List<EmployeeTo> findbyName(String name);
 	void deleteAll();
-	void deleteEmployee(int id);
-	void updateEmployee(int id, Date dateOfBirth, String name, String surname, String pesel);
-
+	void deleteEmployee(long id);
+	void createOrUpdateEmployee(EmployeeTo employeeTo);
 
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class EmployeeTo {
 	
-	private int idEmployee;
+	private long idEmployee;
 	private Date dateOfBirth;
 	private String firstName;
 	private String lastName;
@@ -17,7 +17,7 @@ public class EmployeeTo {
 	public EmployeeTo() {
 	}
 	
-	public EmployeeTo(int idEmployee, Date dateOfBirth, String firstName, String lastName, String pesel, DepartmentTo department, 
+	public EmployeeTo(long idEmployee, Date dateOfBirth, String firstName, String lastName, String pesel, DepartmentTo department, 
 							List<ProjectsOfEmployeeTo> projectsofemployees) {
 		this.idEmployee=idEmployee;
 		this.dateOfBirth=dateOfBirth;
@@ -28,10 +28,10 @@ public class EmployeeTo {
 		this.projectsofemployees=projectsofemployees;
 	}
 	
-	public int getIdEmployee() {
+	public long getIdEmployee() {
 		return idEmployee;
 	}
-	public void setIdEmployee(int idEmployee) {
+	public void setIdEmployee(long idEmployee) {
 		this.idEmployee = idEmployee;
 	}
 	public Date getDateOfBirth() {

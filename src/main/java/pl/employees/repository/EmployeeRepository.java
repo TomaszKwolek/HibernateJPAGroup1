@@ -1,6 +1,5 @@
 package pl.employees.repository;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,20 +11,16 @@ import pl.employees.model.entity.EmployeeEntity;
 
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> {
 	
-    @Query("from EmployeeEntity l where l.firstName like :name%")
+    @Query("from EmployeeEntity e where e.firstName like :name% or e.lastName like :name%")
     List<EmployeeEntity> findByName(@Param("name") String name);
-
-//	@Modifying(clearAutomatically = true)
-//	@Query(value = "insert into EmployeeEntity (idEmployee) VALUES (:29)")
-//	  void insertEmployee(Date date_of_birth, String first_name, String last_name, String pesel);
-//	
-//	@Modifying(clearAutomatically = true)
-//	@Query("update Employee e set e.name = :name, e.surname = :surname, e.pesel = :pesel, e.dateOfBirth = :dateOfBirth where e.id = :id")
-//	void updateEmployeeData(@Param("name") String name, @Param("surname") String surname,
-//			@Param("pesel") String pesel, @Param("dateOfBirth") Date dateOfBirth, @Param("id") int id);
     
     @Modifying(clearAutomatically = true)
-    @Query("update EmployeeEntity e set e.firstName = ?1, e.lastName = ?2 where e.idEmployee = ?3")
-    void updateEmployee(String firstName, String lastName, Integer userId);
+    @Query("delete from EmployeeEntity")
+    void deleteAllEmployees();
+    
+    @Modifying(clearAutomatically = true)
+    @Query("delete EmployeeEntity e where e.idEmployee = ?1")
+    void deleteEmployee(long employeeId);
+	
 	
 }

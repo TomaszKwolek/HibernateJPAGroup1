@@ -19,15 +19,15 @@ public class ProjectsOfEmployeeEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_projects_of_employees")
-	private int idProjectsOfEmployees;
+	private long idProjectsOfEmployees;
 	
 	//bi-directional many-to-one association to EmployeeEntity
-		@ManyToOne
+		@ManyToOne(optional=true, cascade = {CascadeType.ALL})
 		@JoinColumn(name="id_employee")
 		private EmployeeEntity employee;
 		
 		//bi-directional many-to-one association to ProjectEntity
-		@ManyToOne
+		@ManyToOne(cascade = {CascadeType.ALL})
 		@JoinColumn(name="project_name")
 		private ProjectEntity project;
 
@@ -48,7 +48,7 @@ public class ProjectsOfEmployeeEntity implements Serializable {
 	}
 	
 
-	public ProjectsOfEmployeeEntity(int idProjectsOfEmployees, EmployeeEntity employee, ProjectEntity project,
+	public ProjectsOfEmployeeEntity(long idProjectsOfEmployees, EmployeeEntity employee, ProjectEntity project,
 			Date dateStart, Date dateStop, String role, BigDecimal dailySalary) {
 		super();
 		this.idProjectsOfEmployees = idProjectsOfEmployees;
@@ -63,11 +63,11 @@ public class ProjectsOfEmployeeEntity implements Serializable {
 
 
 
-	public int getIdProjectsOfEmployees() {
+	public long getIdProjectsOfEmployees() {
 		return idProjectsOfEmployees;
 	}
 
-	public void setIdProjectsOfEmployees(int idProjectsOfEmployees) {
+	public void setIdProjectsOfEmployees(long idProjectsOfEmployees) {
 		this.idProjectsOfEmployees = idProjectsOfEmployees;
 	}
 

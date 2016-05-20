@@ -1,0 +1,9 @@
+SET SQL_SAFE_UPDATES=0;
+SET FOREIGN_KEY_CHECKS=0;
+
+
+DELETE FROM department;
+DELETE FROM project;
+DELETE FROM employee;
+DELETE FROM projectsofemployees;
+

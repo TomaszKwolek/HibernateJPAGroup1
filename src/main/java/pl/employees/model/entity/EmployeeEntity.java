@@ -2,6 +2,8 @@ package pl.employees.model.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class EmployeeEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id_employee")
-	private int idEmployee;
+	private long idEmployee;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_of_birth")
@@ -32,18 +34,18 @@ public class EmployeeEntity implements Serializable {
 
 	private String pesel;
 	// bi-directional many-to-one association to DepartmentEntity
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "department_name")
 	private DepartmentEntity department;
 
 	// bi-directional many-to-one association to ProjectsOfEmployeeEntity
-	@OneToMany(mappedBy = "employee")
+	@OneToMany(mappedBy = "employee", cascade = {CascadeType.ALL}, fetch=FetchType.LAZY)
 	private List<ProjectsOfEmployeeEntity> projectsofemployees;
 
 	public EmployeeEntity() {
 	}
 
-	public EmployeeEntity(int idEmployee, Date dateOfBirth, String firstName, String lastName, String pesel,
+	public EmployeeEntity(long idEmployee, Date dateOfBirth, String firstName, String lastName, String pesel,
 			DepartmentEntity department, List<ProjectsOfEmployeeEntity> projectsofemployees) {
 		this.idEmployee = idEmployee;
 		this.dateOfBirth = dateOfBirth;
@@ -54,11 +56,11 @@ public class EmployeeEntity implements Serializable {
 		this.projectsofemployees = projectsofemployees;
 	}
 
-	public int getIdEmployee() {
+	public long getIdEmployee() {
 		return this.idEmployee;
 	}
 
-	public void setIdEmployee(int idEmployee) {
+	public void setIdEmployee(long idEmployee) {
 		this.idEmployee = idEmployee;
 	}
 
