@@ -34,6 +34,8 @@
 
 
 	<!--<jdbc:embedded-database id="dataSource" type="HSQL" /> -->
+	
+	<bean id="mapper" class="pl.employees.mapper.MapperFacadeFactoryBean"/>
 
 	<bean name="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">

@@ -26,27 +26,27 @@ public class EmployeeEngagementServiceTest {
 	@Autowired
 	private EmployeesEngagementService employeeEngagementService;
 
-	@Test
-	@Sql(scripts = "inserts.sql")
-	public void testShouldFindAll() {
-		// given
-		List<ProjectsOfEmployeeTo> poes = employeeEngagementService.findAllProjectsEngagements();
-		// then
-		System.out.println(poes.size());
-		assertFalse(poes.isEmpty());
-	}
-	
-	@Test
-	@Sql(scripts = "inserts.sql")
-	public void testShouldFindProjectsOfEmployees() {
-		// given
-		List<ProjectsOfEmployeeTo> poes = employeeEngagementService.findProjectsEngagement(10L, "ETH Zurych");
-		int expectedSizeOfPoes = poes.size();
-		// then
-		System.out.println(poes.size());
-		assertFalse(poes.isEmpty());
-		assertEquals(expectedSizeOfPoes, 1);
-	}
+//	@Test
+//	@Sql(scripts = "inserts.sql")
+//	public void testShouldFindAll() {
+//		// given
+//		List<ProjectsOfEmployeeTo> poes = employeeEngagementService.findAllProjectsEngagements();
+//		// then
+//		System.out.println(poes.size());
+//		assertFalse(poes.isEmpty());
+//	}
+//	
+//	@Test
+//	@Sql(scripts = "inserts.sql")
+//	public void testShouldFindProjectsOfEmployees() {
+//		// given
+//		List<ProjectsOfEmployeeTo> poes = employeeEngagementService.findProjectsEngagement(10L, "ETH Zurych");
+//		int expectedSizeOfPoes = poes.size();
+//		// then
+//		System.out.println(poes.size());
+//		assertFalse(poes.isEmpty());
+//		assertEquals(expectedSizeOfPoes, 1);
+//	}
 	
 	@Test
 	@Sql(scripts = "deleteAll.sql")
@@ -58,6 +58,8 @@ public class EmployeeEngagementServiceTest {
 	
 	ProjectsOfEmployeeTo poeTo = new ProjectsOfEmployeeTo();
 	poeTo.setProject(projectTo);
+	employeeEngagementService.createEmployeeEngagement(poeTo);
+	
 	
 	
 //	List<ProjectsOfEmployeeTo> poes = new ArrayList<>();

@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ma.glasnost.orika.MapperFacade;
 import pl.employees.mapper.Mapper;
 import pl.employees.model.entity.DepartmentEntity;
 import pl.employees.model.entity.EmployeeEntity;
@@ -34,17 +35,17 @@ public class EmployeesEngagementServiceImpl implements EmployeesEngagementServic
 	private EmployeeEngagementRepository employeeEngagementRepository;
 	
 	@Autowired
-	private Mapper mapper;
+	private MapperFacade mapper;
 
 	@Override
 	public List<ProjectsOfEmployeeTo> findAllProjectsEngagements() {
-		return mapper.mapProjectsOfEmployee2Tos(employeeEngagementRepository.findAll());
+		return mapper.mapAsList(employeeEngagementRepository.findAll(), ProjectsOfEmployeeTo.class);
 	}
 
 
 	@Override
 	public List<ProjectsOfEmployeeTo> findProjectsEngagement(long idEmployee, String projectName) {
-		return mapper.mapProjectsOfEmployee2Tos(employeeEngagementRepository.findProjectsOfEmployee(idEmployee, projectName));
+		return mapper.mapAsList(employeeEngagementRepository.findProjectsOfEmployee(idEmployee, projectName), ProjectsOfEmployeeTo.class);
 	}
 
 
@@ -56,7 +57,7 @@ public class EmployeesEngagementServiceImpl implements EmployeesEngagementServic
 
 	@Override
 	public void createEmployeeEngagement(ProjectsOfEmployeeTo poe) {
-		employeeEngagementRepository.save(mapper.map2ProjectsOfEmployeeEntity(poe));
+		employeeEngagementRepository.save(mapper.map(poe, ProjectsOfEmployeeEntity.class));
 	}
 
 

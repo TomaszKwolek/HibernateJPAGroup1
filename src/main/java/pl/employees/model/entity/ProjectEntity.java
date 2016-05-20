@@ -23,17 +23,15 @@ public class ProjectEntity implements Serializable {
 	private String projectType;
 
 	//bi-directional many-to-one association to ProjectsOfEmployeeEntity
-	@OneToMany(mappedBy="project", cascade = {CascadeType.ALL})
-	private List<ProjectsOfEmployeeEntity> projectsofemployees;
+	//@OneToMany(mappedBy="project", orphanRemoval = false, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	//private List<ProjectsOfEmployeeEntity> projectsofemployees;
 
 	public ProjectEntity() {
 	}
 	
-	public ProjectEntity(String projectName, String projectType, List<ProjectsOfEmployeeEntity> projectsofemployees) {
-		super();
+	public ProjectEntity(String projectName, String projectType) {
 		this.projectName = projectName;
 		this.projectType = projectType;
-		this.projectsofemployees = projectsofemployees;
 	}
 
 	public String getProjectName() {
@@ -52,26 +50,6 @@ public class ProjectEntity implements Serializable {
 		this.projectType = projectType;
 	}
 
-	public List<ProjectsOfEmployeeEntity> getProjectsofemployees() {
-		return this.projectsofemployees;
-	}
 
-	public void setProjectsofemployees(List<ProjectsOfEmployeeEntity> projectsofemployees) {
-		this.projectsofemployees = projectsofemployees;
-	}
-
-	public ProjectsOfEmployeeEntity addProjectsofemployee(ProjectsOfEmployeeEntity projectsofemployee) {
-		getProjectsofemployees().add(projectsofemployee);
-		projectsofemployee.setProject(this);
-
-		return projectsofemployee;
-	}
-
-	public ProjectsOfEmployeeEntity removeProjectsofemployee(ProjectsOfEmployeeEntity projectsofemployee) {
-		getProjectsofemployees().remove(projectsofemployee);
-		projectsofemployee.setProject(null);
-
-		return projectsofemployee;
-	}
 
 }

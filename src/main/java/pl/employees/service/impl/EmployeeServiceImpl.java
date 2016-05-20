@@ -1,22 +1,13 @@
 package pl.employees.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.employees.mapper.Mapper;
-import pl.employees.model.entity.DepartmentEntity;
+import ma.glasnost.orika.MapperFacade;
 import pl.employees.model.entity.EmployeeEntity;
-import pl.employees.model.entity.ProjectsOfEmployeeEntity;
 import pl.employees.model.to.EmployeeTo;
 import pl.employees.repository.EmployeeRepository;
 import pl.employees.service.EmployeeService;
@@ -30,23 +21,23 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private EmployeeRepository employeeRepository;
 	
 	@Autowired
-	private Mapper mapper;
+	private MapperFacade mapper;
 
 	@Override
 	public List<EmployeeTo> findAllEmployees() {
-		return mapper.mapEmployee2Tos(employeeRepository.findAll());
+		return mapper.mapAsList(employeeRepository.findAll(), EmployeeTo.class);
 	}
 	
 
 	@Override
 	public List<EmployeeTo> findbyName(String name) {
-		return mapper.mapEmployee2Tos(employeeRepository.findByName(name));
+		return mapper.mapAsList(employeeRepository.findByName(name), EmployeeTo.class);
 	}
 	
 	@Override
 	@Transactional(readOnly = false)
 	public void createOrUpdateEmployee(EmployeeTo employeeTo) {
-		employeeRepository.save(mapper.map2EmployeeEntity(employeeTo));
+		employeeRepository.save(mapper.map(employeeTo, EmployeeEntity.class));
 	}
 
 

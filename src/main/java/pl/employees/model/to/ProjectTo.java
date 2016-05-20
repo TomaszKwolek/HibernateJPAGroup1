@@ -12,11 +12,9 @@ public class ProjectTo {
 	public ProjectTo() {
 	}
 	
-	public ProjectTo(String projectName, String projectType, List<ProjectsOfEmployeeTo> projectsofemployees) {
-		super();
+	public ProjectTo(String projectName, String projectType) {
 		this.projectName = projectName;
 		this.projectType = projectType;
-		this.projectsofemployees = projectsofemployees;
 	}
 
 	public String getProjectName() {
@@ -35,12 +33,5 @@ public class ProjectTo {
 		this.projectType = projectType;
 	}
 
-	public List<ProjectsOfEmployeeTo> getProjectsofemployees() {
-		return projectsofemployees;
-	}
-
-	public void setProjectsofemployees(List<ProjectsOfEmployeeTo> projectsofemployees) {
-		this.projectsofemployees = projectsofemployees;
-	}
 	
 }
