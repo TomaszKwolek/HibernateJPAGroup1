@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,25 +21,25 @@ public class EmployeeServiceTest {
 	@Autowired
 	private EmployeeService employeeService;
 
-//	@Test
-//	public void testShouldFindAll() {
-//		// given
-//		 List<EmployeeTo> employees = employeeService.findAllEmployees();
-//		 System.out.println(employees.size());
-//		// then
-//		assertNotNull(employees);
-//
-//	}
-//	
-//	@Test
-//	public void testShouldFindByFirstName() {
-//		// given
-//		 List<EmployeeTo> employees = employeeService.findByFirstName("%a%");
-//		 System.out.println(employees.size());
-//		// then
-//		assertNotNull(employees);
+	@Test
+	public void testShouldFindAll() {
+		// given
+		 List<EmployeeTo> employees = employeeService.findAllEmployees();
+		 System.out.println(employees.size());
+		// then
+		assertNotNull(employees);
 
-	//}
+	}
+	
+	@Test
+	public void testShouldFindByFirstName() {
+		// given
+		 List<EmployeeTo> employees = employeeService.findByFirstName("%a%");
+		 System.out.println(employees.size());
+		// then
+		assertNotNull(employees);
+
+	}
 	
 	@Test
 	public void testShouldCreateNewEmployee() {
@@ -50,24 +51,21 @@ public class EmployeeServiceTest {
 
 	}
 	
-//	@Test
-//	public void testShouldDeleteAll() {
-//		// given
-//		employeeService.deleteAll();
-//		//System.out.println(employees.size());
-//		// then
-//		//assertNotNull(employees);
-//
-//	}
-//	
-//	@Test
-//	public void testShouldDelete() {
-//		// given
-//		//System.out.println(employees.size());
-//		// then
-//		//assertNotNull(employees);
-//
-//	}
+	@Test
+	public void testShouldDeleteAll() {
+		// given
+		employeeService.deleteAll();
+		//System.out.println(employees.size());
+		// then
+		//assertNotNull(employees);
+
+	}
+	
+	@Test
+	@Ignore
+	public void testShouldDelete() {
+
+	}
 	
 	@Test
 	public void testShouldUpdateEmployee() {
