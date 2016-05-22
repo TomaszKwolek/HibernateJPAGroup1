@@ -2,7 +2,6 @@ package pl.employees.service;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
