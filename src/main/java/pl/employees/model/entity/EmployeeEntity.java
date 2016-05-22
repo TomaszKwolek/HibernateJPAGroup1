@@ -33,14 +33,9 @@ public class EmployeeEntity implements Serializable {
 	private String lastName;
 
 	private String pesel;
-	// bi-directional many-to-one association to DepartmentEntity
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne( cascade = {CascadeType.ALL}, fetch=FetchType.LAZY)
 	@JoinColumn(name = "department_name")
 	private DepartmentEntity department;
-
-	// bi-directional many-to-one association to ProjectsOfEmployeeEntity
-//	@OneToMany(mappedBy = "employee", orphanRemoval = false, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-//	private List<ProjectsOfEmployeeEntity> projectsofemployees;
 
 	public EmployeeEntity() {
 	}

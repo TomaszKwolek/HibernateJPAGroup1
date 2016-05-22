@@ -12,16 +12,7 @@ import pl.employees.model.entity.ProjectsOfEmployeeEntity;
 
 public interface EmployeeEngagementRepository extends JpaRepository<ProjectsOfEmployeeEntity, Long> {
 	
-    @Query("from ProjectsOfEmployeeEntity poe where id_employee=?1 and project_name=?2 and dateStop is null")
-    List<ProjectsOfEmployeeEntity> findProjectsOfEmployee(long idEmployee, String projectName);
-    //long idPOE, String projectName
-//    @Modifying(clearAutomatically = true)
-//    @Query("delete from EmployeeEntity")
-//    void deleteAllEmployees();
-//    
-//    @Modifying(clearAutomatically = true)
-//    @Query("delete EmployeeEntity e where e.idEmployee = ?1")
-//    void deleteEmployee(long employeeId);
-	
+    @Query("from ProjectsOfEmployeeEntity poe join fetch poe.employee e where project_name=?1 and pesel=?2 and poe.dateStop is null")
+    List<ProjectsOfEmployeeEntity> findProjectsOfEmployee(String projectName, String pesel);
 	
 }

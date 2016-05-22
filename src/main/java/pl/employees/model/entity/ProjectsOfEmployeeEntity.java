@@ -5,48 +5,44 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
-
 /**
  * The persistent class for the projectsofemployees database table.
  * 
  */
 @Entity
-@Table(name="projectsofemployees")
-@NamedQuery(name="ProjectsOfEmployeeEntity.findAll", query="SELECT p FROM ProjectsOfEmployeeEntity p")
+@Table(name = "projectsofemployees")
+@NamedQuery(name = "ProjectsOfEmployeeEntity.findAll", query = "SELECT p FROM ProjectsOfEmployeeEntity p")
 public class ProjectsOfEmployeeEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_projects_of_employees")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_projects_of_employees")
 	private long idProjectsOfEmployees;
-	
-	//bi-directional many-to-one association to EmployeeEntity
-		@ManyToOne(optional=true, cascade = {CascadeType.ALL})
-		@JoinColumn(name="id_employee")
-		private EmployeeEntity employee;
-		
-		//bi-directional many-to-one association to ProjectEntity
-		@ManyToOne(cascade = {CascadeType.ALL})
-		@JoinColumn(name="project_name")
-		private ProjectEntity project;
+
+	@ManyToOne(optional = true, cascade = { CascadeType.ALL })
+	@JoinColumn(name = "id_employee")
+	private EmployeeEntity employee;
+
+	@ManyToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
+	@JoinColumn(name = "project_name")
+	private ProjectEntity project;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="date_start")
+	@Column(name = "date_start")
 	private Date dateStart;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="date_stop")
+	@Column(name = "date_stop")
 	private Date dateStop;
 
 	private String role;
 
-	@Column(name="daily_salary")
+	@Column(name = "daily_salary")
 	private BigDecimal dailySalary;
-	
+
 	public ProjectsOfEmployeeEntity() {
 	}
-	
 
 	public ProjectsOfEmployeeEntity(long idProjectsOfEmployees, EmployeeEntity employee, ProjectEntity project,
 			Date dateStart, Date dateStop, String role, BigDecimal dailySalary) {
@@ -59,9 +55,6 @@ public class ProjectsOfEmployeeEntity implements Serializable {
 		this.role = role;
 		this.dailySalary = dailySalary;
 	}
-
-
-
 
 	public long getIdProjectsOfEmployees() {
 		return idProjectsOfEmployees;
@@ -122,6 +115,5 @@ public class ProjectsOfEmployeeEntity implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
+
 }

@@ -1,20 +1,19 @@
 package pl.employees.service;
 
 
+import java.sql.Date;
 import java.util.List;
 
-
+import pl.employees.model.to.EmployeeTo;
 import pl.employees.model.to.ProjectTo;
 import pl.employees.model.to.ProjectsOfEmployeeTo;
 
 public interface EmployeesEngagementService{
 
 	List<ProjectsOfEmployeeTo> findAllProjectsEngagements();
-	List<ProjectsOfEmployeeTo> findProjectsEngagement(long idEmployee, String projectName);
+	List<ProjectsOfEmployeeTo> findCurrentProjectsEngagement(String pesel, String projectName);
 	void deleteAll();
-	void createProject(ProjectTo projectTo);
-	void createEmployeeEngagement(ProjectsOfEmployeeTo poe);
-	void addEmployeeToProject(long idEmployee, ProjectsOfEmployeeTo poe);
-	void removeEmployeeFromProject(long idEmployee, String ProjectName, ProjectsOfEmployeeTo poe);
+	void saveEmployeeEngagement(ProjectsOfEmployeeTo poe);
+	void removeEmployeeFromProject(String pesel, String ProjectName, java.util.Date stopDate);
 
 }

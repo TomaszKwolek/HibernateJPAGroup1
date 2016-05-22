@@ -22,10 +22,6 @@ public class ProjectEntity implements Serializable {
 	@Column(name="project_type")
 	private String projectType;
 
-	//bi-directional many-to-one association to ProjectsOfEmployeeEntity
-	//@OneToMany(mappedBy="project", orphanRemoval = false, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	//private List<ProjectsOfEmployeeEntity> projectsofemployees;
-
 	public ProjectEntity() {
 	}
 	
