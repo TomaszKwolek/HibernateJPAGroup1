@@ -2,11 +2,12 @@ package pl.employees.service;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import pl.employees.model.to.DepartmentTo;
 import pl.employees.model.to.EmployeeTo;
 import pl.employees.model.to.ProjectTo;
 import pl.employees.model.to.ProjectsOfEmployeeTo;
@@ -26,50 +26,86 @@ public class EmployeeEngagementServiceTest {
 	@Autowired
 	private EmployeesEngagementService employeeEngagementService;
 
-//	@Test
-//	@Sql(scripts = "inserts.sql")
-//	public void testShouldFindAll() {
-//		// given
-//		List<ProjectsOfEmployeeTo> poes = employeeEngagementService.findAllProjectsEngagements();
-//		// then
-//		System.out.println(poes.size());
-//		assertFalse(poes.isEmpty());
-//	}
-//	
-//	@Test
-//	@Sql(scripts = "inserts.sql")
-//	public void testShouldFindProjectsOfEmployees() {
-//		// given
-//		List<ProjectsOfEmployeeTo> poes = employeeEngagementService.findProjectsEngagement(10L, "ETH Zurych");
-//		int expectedSizeOfPoes = poes.size();
-//		// then
-//		System.out.println(poes.size());
-//		assertFalse(poes.isEmpty());
-//		assertEquals(expectedSizeOfPoes, 1);
-//	}
-	
+	@Test
+	@Sql(scripts = "inserts.sql")
+	public void testShouldFindAll() {
+		// given
+		List<ProjectsOfEmployeeTo> poes = employeeEngagementService.findAllProjectsEngagements();
+		// then
+		assertEquals(16, poes.size());
+	}
+
+	@Test
+	@Sql(scripts = "inserts.sql")
+	public void testShouldFindCurrentProjectsOfEmployees() {
+		// given
+		List<ProjectsOfEmployeeTo> poes = employeeEngagementService.findCurrentProjectsEngagement("68071306911","ETH Zurych");
+		int expectedSizeOfPoes = poes.size();
+		// then
+		System.out.println(poes.size() + " ");
+		assertFalse(poes.isEmpty());
+		assertEquals(expectedSizeOfPoes, 1);
+	}
+
 	@Test
 	@Sql(scripts = "deleteAll.sql")
-	public void testShouldCreateNewPOE() {
-	// given
-	ProjectTo projectTo = new ProjectTo();
-	projectTo.setProjectName("new project");
-	projectTo.setProjectType("internal");
-	
-	ProjectsOfEmployeeTo poeTo = new ProjectsOfEmployeeTo();
-	poeTo.setProject(projectTo);
-	employeeEngagementService.createEmployeeEngagement(poeTo);
-	
-	
-	
-//	List<ProjectsOfEmployeeTo> poes = new ArrayList<>();
-//	EmployeeTo employeeTo = new EmployeeTo(6, new Date(2001 - 07 - 15), "Jarosław", "Was", "345465634",
-//			departmentTo, poes);
-//	employeeService.createOrUpdateEmployee(employeeTo);
-//	List<EmployeeTo> employees = employeeService.findAllEmployees();
-//	// then
-//	assertFalse(employees.isEmpty());
-//	assertEquals(employees.size(), 1);
+	public void testShouldCreateNewPOE() throws ParseException {
+		// given
+		ProjectsOfEmployeeTo poeTo = new ProjectsOfEmployeeTo();
+		poeTo.setProject(createNewProject("New Project", "internal"));
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		Date startDate = dateFormat.parse("2002/08/03");
+		poeTo.setDateStart(startDate);
+		employeeEngagementService.saveEmployeeEngagement(poeTo);
+		// then
+		List<ProjectsOfEmployeeTo> poes = employeeEngagementService.findAllProjectsEngagements();
+		assertFalse(poes.isEmpty());
+	}
+
+	@Test
+	@Sql(scripts = "deleteAll.sql")
+	public void testShouldAddEmployee() throws ParseException {
+		// given
+		ProjectsOfEmployeeTo poeTo = new ProjectsOfEmployeeTo();
+		poeTo.setProject(createNewProject("New Project", "internal"));
+		EmployeeTo employeeTo = createNewEmployee("2002/08/03", "Andrzej", "Kowalaski", "049239430");
+		poeTo.setEmployee(employeeTo);
+		employeeEngagementService.saveEmployeeEngagement(poeTo);
+		// then
+		List<ProjectsOfEmployeeTo> addedPoes = employeeEngagementService.findAllProjectsEngagements();
+		assertFalse(addedPoes.isEmpty());
+		assertEquals(employeeTo.getPesel(), addedPoes.get(0).getEmployee().getPesel());
+	}
+
+	@Test
+	@Sql(scripts = "inserts.sql")
+	public void testShouldRemoveEmployyeFromProject() throws ParseException {
+		// given
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		Date stopDate = dateFormat.parse("2016/08/03");
+		employeeEngagementService.removeEmployeeFromProject("68071306911", "ETH Zurych", stopDate);
+		// then
+		List<ProjectsOfEmployeeTo> foundPoes = employeeEngagementService.findCurrentProjectsEngagement("68071306911","ETH Zurych");
+		assertTrue(foundPoes.isEmpty());
+
+	}
+
+	private EmployeeTo createNewEmployee(String dateOfBirth, String firstName, String lastName, String Pesel) throws ParseException {
+		EmployeeTo employeeTo = new EmployeeTo();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		Date date = dateFormat.parse(dateOfBirth);
+		employeeTo.setDateOfBirth(date);
+		employeeTo.setFirstName(firstName);
+		employeeTo.setLastName(lastName);
+		employeeTo.setPesel(Pesel);
+		return employeeTo;
+	}
+
+	private ProjectTo createNewProject(String projectName, String projectType) {
+		ProjectTo projectTo = new ProjectTo();
+		projectTo.setProjectName(projectName);
+		projectTo.setProjectType(projectType);
+		return projectTo;
 	}
 
 }

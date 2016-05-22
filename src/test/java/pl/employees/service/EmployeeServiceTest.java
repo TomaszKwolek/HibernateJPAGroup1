@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.junit.Ignore;
@@ -50,9 +53,7 @@ public class EmployeeServiceTest {
 	public void testShouldDeleteEmployee() {
 		DepartmentTo departmentTo = new DepartmentTo();
 		departmentTo.setDepartmentName("FINANCIAL");
-		List<ProjectsOfEmployeeTo> poes = new ArrayList<>();
-		EmployeeTo employeeTo = new EmployeeTo(1, new Date(2001 - 07 - 15), "name", "lastname", "111111111",
-				departmentTo, poes);
+		EmployeeTo employeeTo = new EmployeeTo(1, new Date(2001 - 07 - 15), "name", "lastname", "111111111", departmentTo);
 		employeeService.createOrUpdateEmployee(employeeTo);
 		long id= employeeService.findAllEmployees().get(0).getIdEmployee();
 		// given
@@ -74,30 +75,30 @@ public class EmployeeServiceTest {
 
 	@Test
 	@Sql(scripts = "deleteAll.sql")
-	public void testShouldCreateNewEmployee() {
+	public void testShouldCreateNewEmployee() throws ParseException {
 		// given
 		DepartmentTo departmentTo = new DepartmentTo();
 		departmentTo.setDepartmentName("FINANCIAL");
-		List<ProjectsOfEmployeeTo> poes = new ArrayList<>();
-		EmployeeTo employeeTo = new EmployeeTo(6, new Date(2001 - 07 - 15), "Jarosław", "Was", "345465634",
-				departmentTo, poes);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		Date dateOfBirth = dateFormat.parse("2001/08/03");
+		EmployeeTo employeeTo = new EmployeeTo(6, dateOfBirth, "Jarosław", "Was", "345465634", departmentTo);
 		employeeService.createOrUpdateEmployee(employeeTo);
 		List<EmployeeTo> employees = employeeService.findAllEmployees();
 		// then
 		assertFalse(employees.isEmpty());
 		assertEquals(employees.size(), 1);
-
+		assertEquals(employees.get(0).getPesel(), "345465634");
 	}
 
 	@Test
 	@Sql(scripts = "inserts.sql")
-	public void testShouldUpdateEmployee() {
+	public void testShouldUpdateEmployee() throws ParseException {
 		// given
 		DepartmentTo departmentTo = new DepartmentTo();
 		departmentTo.setDepartmentName("FINANCIAL");
-		List<ProjectsOfEmployeeTo> poes = new ArrayList<>();
-		EmployeeTo employeeTo = new EmployeeTo(8, new Date(2001 - 07 - 15), "Jarosław", "Was", "345465634",
-				departmentTo, poes);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		Date dateOfBirth = dateFormat.parse("2001/07/15");
+		EmployeeTo employeeTo = new EmployeeTo(8, dateOfBirth, "Jarosław", "Was", "345465634", departmentTo);
 		employeeService.createOrUpdateEmployee(employeeTo);
 		// then
 		List<EmployeeTo> employees = employeeService.findbyName("%Jarosław%");

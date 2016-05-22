@@ -16,8 +16,7 @@ public class EmployeeTo {
 	public EmployeeTo() {
 	}
 	
-	public EmployeeTo(long idEmployee, Date dateOfBirth, String firstName, String lastName, String pesel, DepartmentTo department,
-			List<ProjectsOfEmployeeTo> projectsofemployees) {
+	public EmployeeTo(long idEmployee, Date dateOfBirth, String firstName, String lastName, String pesel, DepartmentTo department) {
 		this.idEmployee=idEmployee;
 		this.dateOfBirth=dateOfBirth;
 		this.firstName=firstName;

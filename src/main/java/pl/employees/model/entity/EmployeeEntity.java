@@ -41,7 +41,7 @@ public class EmployeeEntity implements Serializable {
 	}
 
 	public EmployeeEntity(long idEmployee, Date dateOfBirth, String firstName, String lastName, String pesel,
-			DepartmentEntity department, List<ProjectsOfEmployeeEntity> projectsofemployees) {
+			DepartmentEntity department) {
 		this.idEmployee = idEmployee;
 		this.dateOfBirth = dateOfBirth;
 		this.firstName = firstName;
