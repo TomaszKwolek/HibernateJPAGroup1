@@ -1,7 +1,5 @@
 package pl.employees.model.to;
 
-
-
 public class DepartmentTo {
 	
 	private String departmentName;

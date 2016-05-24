@@ -28,12 +28,6 @@
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-
-	<!--<util:properties id="hsqldbJpaProps"location="classpath:/test_data_access/hsqldb_jpa.properties" 
-		/> -->
-
-
-	<!--<jdbc:embedded-database id="dataSource" type="HSQL" /> -->
 	
 	<bean id="mapper" class="pl.employees.mapper.MapperFacadeFactoryBean"/>
 
@@ -44,7 +38,6 @@
 		<property name="username" value="tomek" />
 		<property name="password" value="starterkit" />
 	</bean>
-
 
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">

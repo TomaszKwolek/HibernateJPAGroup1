@@ -1,11 +1,8 @@
 package pl.employees.service;
 
 
-import java.sql.Date;
 import java.util.List;
 
-import pl.employees.model.to.EmployeeTo;
-import pl.employees.model.to.ProjectTo;
 import pl.employees.model.to.ProjectsOfEmployeeTo;
 
 public interface EmployeesEngagementService{

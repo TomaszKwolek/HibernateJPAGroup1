@@ -43,19 +43,20 @@ public class EmployeeServiceTest {
 		// given
 		employeeService.deleteAll();
 		List<EmployeeTo> employees = employeeService.findAllEmployees();
-		// // then
+		// then
 		assertTrue(employees.isEmpty());
 	}
 
 	@Test
 	@Sql(scripts = "deleteAll.sql")
 	public void testShouldDeleteEmployee() {
+		// given
 		DepartmentTo departmentTo = new DepartmentTo();
 		departmentTo.setDepartmentName("FINANCIAL");
 		EmployeeTo employeeTo = new EmployeeTo(1, new Date(2001 - 07 - 15), "name", "lastname", "111111111", departmentTo);
+		// when
 		employeeService.createOrUpdateEmployee(employeeTo);
 		long id= employeeService.findAllEmployees().get(0).getIdEmployee();
-		// given
 		employeeService.deleteEmployee(id);
 		List<EmployeeTo> employees = employeeService.findAllEmployees();
 		// // then
@@ -81,6 +82,7 @@ public class EmployeeServiceTest {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date dateOfBirth = dateFormat.parse("2001/08/03");
 		EmployeeTo employeeTo = new EmployeeTo(6, dateOfBirth, "Jarosław", "Was", "345465634", departmentTo);
+		// when
 		employeeService.createOrUpdateEmployee(employeeTo);
 		List<EmployeeTo> employees = employeeService.findAllEmployees();
 		// then
@@ -98,10 +100,12 @@ public class EmployeeServiceTest {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date dateOfBirth = dateFormat.parse("2001/07/15");
 		EmployeeTo employeeTo = new EmployeeTo(8, dateOfBirth, "Jarosław", "Was", "345465634", departmentTo);
+		// when
 		employeeService.createOrUpdateEmployee(employeeTo);
 		// then
-		List<EmployeeTo> employees = employeeService.findbyName("%Jarosław%");
+		List<EmployeeTo> employees = employeeService.findbyName("Jarosław");
 		assertFalse(employees.isEmpty());
+		assertEquals(employees.get(0).getFirstName(), "Jarosław");
 	}
 
 }

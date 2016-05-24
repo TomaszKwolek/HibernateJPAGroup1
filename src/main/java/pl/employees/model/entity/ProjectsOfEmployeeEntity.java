@@ -20,7 +20,7 @@ public class ProjectsOfEmployeeEntity implements Serializable {
 	@Column(name = "id_projects_of_employees")
 	private long idProjectsOfEmployees;
 
-	@ManyToOne(optional = true, cascade = { CascadeType.ALL })
+	@ManyToOne(optional = true, cascade = { CascadeType.ALL})
 	@JoinColumn(name = "id_employee")
 	private EmployeeEntity employee;
 

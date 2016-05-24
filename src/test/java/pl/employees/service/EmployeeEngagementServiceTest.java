@@ -45,6 +45,9 @@ public class EmployeeEngagementServiceTest {
 		System.out.println(poes.size() + " ");
 		assertFalse(poes.isEmpty());
 		assertEquals(expectedSizeOfPoes, 1);
+		assertEquals(poes.get(0).getEmployee().getPesel(), "68071306911");
+		assertEquals(poes.get(0).getProject().getProjectName(), "ETH Zurych");
+
 	}
 
 	@Test
@@ -54,12 +57,14 @@ public class EmployeeEngagementServiceTest {
 		ProjectsOfEmployeeTo poeTo = new ProjectsOfEmployeeTo();
 		poeTo.setProject(createNewProject("New Project", "internal"));
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		Date startDate = dateFormat.parse("2002/08/03");
+		Date startDate = dateFormat.parse("2002/08/03"); 
+		// when
 		poeTo.setDateStart(startDate);
 		employeeEngagementService.saveEmployeeEngagement(poeTo);
 		// then
 		List<ProjectsOfEmployeeTo> poes = employeeEngagementService.findAllProjectsEngagements();
 		assertFalse(poes.isEmpty());
+		assertEquals(poes.get(0).getProject().getProjectName(), "New Project");
 	}
 
 	@Test
@@ -70,6 +75,7 @@ public class EmployeeEngagementServiceTest {
 		poeTo.setProject(createNewProject("New Project", "internal"));
 		EmployeeTo employeeTo = createNewEmployee("2002/08/03", "Andrzej", "Kowalaski", "049239430");
 		poeTo.setEmployee(employeeTo);
+		// when
 		employeeEngagementService.saveEmployeeEngagement(poeTo);
 		// then
 		List<ProjectsOfEmployeeTo> addedPoes = employeeEngagementService.findAllProjectsEngagements();
@@ -83,6 +89,7 @@ public class EmployeeEngagementServiceTest {
 		// given
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date stopDate = dateFormat.parse("2016/08/03");
+		// when
 		employeeEngagementService.removeEmployeeFromProject("68071306911", "ETH Zurych", stopDate);
 		// then
 		List<ProjectsOfEmployeeTo> foundPoes = employeeEngagementService.findCurrentProjectsEngagement("68071306911","ETH Zurych");
